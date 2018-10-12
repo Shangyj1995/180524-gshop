@@ -1,5 +1,5 @@
 <template>
-  <section class="msite">
+  <section class="msite" v-if="categorysArr.length">
     <!--首页头部-->
     <TopHeader :title="address.name">
       <span class="header_search" slot="left">
@@ -35,6 +35,7 @@
       <ShopList/>
     </div>
   </section>
+  <img src="./images/msite_back.svg" alt="msite" v-else>
 </template>
 
 <script>

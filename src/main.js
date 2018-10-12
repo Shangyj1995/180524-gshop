@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import {Button} from 'mint-ui'
 import App from './App.vue'
 import router from './router'
 import TopHeader from './components/TopHeader/TopHeader.vue'
@@ -8,6 +9,7 @@ import 'swiper/dist/css/swiper.min.css'
 
 
 Vue.component('TopHeader',TopHeader)
+Vue.component(Button.name,Button)
 
 new Vue({
   el: '#app',
