@@ -24,7 +24,12 @@ export const reqSendCode = phone => ajax('/api/sendcode', {phone})
 //手机号验证码登录
 export const reqSmsLogin = (phone, code) => ajax('/api/login_sms', {phone, code}, 'POST')
 //获取用户信息
-export const reqUser=()=>ajax('/api/userinfo')
+export const reqUser = () => ajax('/api/userinfo')
 
 //退出登录
-export const reqLogout=()=>ajax('/api/logout')
+export const reqLogout = () => ajax('/api/logout')
+
+
+export const reqGoods = () => ajax('/goods')
+export const reqRatings = () => ajax('/ratings')
+export const reqInfo = () => ajax('/info')

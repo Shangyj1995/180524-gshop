@@ -6,6 +6,7 @@ import TopHeader from './components/TopHeader/TopHeader.vue'
 import store from './store'
 
 import 'swiper/dist/css/swiper.min.css'
+import './mock/mockServer'
 
 
 Vue.component('TopHeader',TopHeader)
