@@ -19,7 +19,7 @@
           <li class="food-list-hook" v-for="(good,index) in goods" :key="index">
             <h1 class="title">{{good.name}}</h1>
             <ul>
-              <li class="food-item bottom-border-1px" v-for="(food,index) in good.foods" :key="index">
+              <li class="food-item bottom-border-1px" v-for="(food,index) in good.foods" :key="index" @click="showFood(food)">
                 <div class="icon">
                   <img width="57" height="57" :src="food.icon">
                 </div>
@@ -34,7 +34,7 @@
                     <span class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</span>
                   </div>
                   <div class="cartcontrol-wrapper">
-                    CartControl组件
+                    <CartControl :food="food"/>
                   </div>
                 </div>
               </li>
@@ -42,19 +42,39 @@
           </li>
         </ul>
       </div>
+      <ShopCart/>
     </div>
+    <Food :food="food" ref="food"/>
+
   </div>
 </template>
 
 <script>
+  /*
+1. 滑动右侧列表, 左侧列表的当前分类同步变化
+2. 点击左侧某个分类项, 右侧列表滑动到对应位置
+3. 完善1的功能: 使用左侧当前分类总是可见
+
+
+currentIndex: 当前分类的下标
+   右侧列表Y轴方向滑动的坐标: scrollY
+   右侧分类li的top值组成的数据: tops
+
+tops: 列表显示之后统计, 后面不会再变化了
+scrollY: 在右侧滑动过程中不断更新
+ */
+
   import {mapState} from 'vuex'
   import BScroll from 'better-scroll'
+  import Food from '../../../components/Food/Food.vue'
+  import ShopCart from '../../../components/ShopCart/ShopCart.vue'
 
   export default {
     data() {
       return {
         scrollY: 0,//右侧列表Y轴方向滑动的坐标
         tops: [],//右侧分类li的top值组成的数据
+        food:{},//当前需要显示的food
       }
     },
     computed: {
@@ -145,8 +165,21 @@
 
         //让右侧列表滚动到此处
         this.rightScroll.scrollTo(0, y, 300)
+      },
+
+      showFood(food){
+        //更新food组件页面
+        this.food=food
+        //显示food组件页面
+        /*在父组件中得到子组件对象，并调用他的方法*/
+        this.$refs.food.toggleShow()
+
       }
 
+    },
+    components:{
+      Food,
+      ShopCart
     }
   }
 </script>
