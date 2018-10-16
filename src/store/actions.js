@@ -88,33 +88,37 @@ export default {
     }
   },
   //异步获取ratings信息
-  async getRatings({commit}) {
+  async getRatings({commit}, cb) {
     const result = await reqRatings()
     if (result.code === 0) {
       const ratings = result.data
       commit(RECEIVE_RATINGS, {ratings})
+      //在更新状态后立即调用
+      typeof cb === 'function' && cb()
     }
   },
   //异步获取info信息
-  async getInfo({commit}) {
+  async getInfo({commit}, cb) {
     const result = await reqInfo()
     if (result.code === 0) {
       const info = result.data
       commit(RECEIVE_INFO, {info})
+      //在更新状态后立即调用
+      typeof cb === 'function' && cb()
     }
   },
 
 
-  updateFoodCount({commit},{isAdd,food}){
-    if(isAdd){//增加
-      commit(INCREMENT_FOOD_COUNT,{food})
-    }else{//减少
-      commit(DECREMENT_FOOD_COUNT,{food})
+  updateFoodCount({commit}, {isAdd, food}) {
+    if (isAdd) {//增加
+      commit(INCREMENT_FOOD_COUNT, {food})
+    } else {//减少
+      commit(DECREMENT_FOOD_COUNT, {food})
     }
   },
 
   //清空购物车
-  clearCart({commit}){
+  clearCart({commit}) {
     commit(CLEAR_CART)
   }
 }
