@@ -1,10 +1,7 @@
 <template>
   <div id="app">
-    <keep-alive>
-      <router-view/>
-    </keep-alive>
-
-    <FooterGuide  v-if="$route.meta.showFooter"/>
+    <router-view/>
+    <FooterGuide v-if="$route.meta.showFooter"/>
   </div>
 </template>
 
@@ -12,7 +9,7 @@
   import FooterGuide from './components/FooterGuide/FooterGuide.vue'
 
   export default {
-    mounted(){
+    mounted() {
       // 异步获取address, 并保存到state
       this.$store.dispatch('getAddress')
       //异步获取user，并保存到state
